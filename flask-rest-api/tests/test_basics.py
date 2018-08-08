@@ -1,14 +1,21 @@
-import unittest
+import pytest
 
-from flask import current_app
+from app.app import app
 
-class BasicsTestCase(unittest.TestCase):
+@pytest.fixture
+def client(request):
+    test_client = app.test_client()
 
-    def setUp(self):
-        pass
+    def teardown():
+        print("running teardown")
 
-    def tearDown(self):
-        pass
+    request.addfinalizer(teardown)
 
-    def test_that_passes(self):
-        self.assertTrue(True)
+    return test_client
+
+def test_that_passes(client):
+    assert True
+ 
+def test_dummmy(client):
+    response = client.get('/')
+    assert b'Hello World!' in response.data

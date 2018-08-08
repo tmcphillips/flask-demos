@@ -4,14 +4,7 @@ from app.app import app
 
 @pytest.fixture
 def client(request):
-    test_client = app.test_client()
-
-    def teardown():
-        print("running teardown")
-
-    request.addfinalizer(teardown)
-
-    return test_client
+    return app.test_client()
 
 def test_response_status_code_is_200(client):
     response = client.get('/')

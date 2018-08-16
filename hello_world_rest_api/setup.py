@@ -11,5 +11,6 @@ setup(
     license='MIT',
     packages=['hello_world_rest_api'],
     package_dir={'': 'src'},
-    data_files = [("", ["LICENSE.txt"])]
+    data_files = [("", ["LICENSE.txt"])],
+    install_requires=['Flask >= 1.0.2']
 )

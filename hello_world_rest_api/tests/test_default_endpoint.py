@@ -1,6 +1,6 @@
 import pytest
 
-from app.app import app
+from hello_world_rest_api import app
 
 @pytest.fixture
 def client(request):

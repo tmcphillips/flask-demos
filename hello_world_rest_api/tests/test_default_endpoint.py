@@ -1,6 +1,6 @@
 import pytest
 
-from hello_world_rest_api import app
+from hello_world_rest_api.hello_world_flask_app import app
 
 @pytest.fixture
 def client(request):

@@ -4,6 +4,6 @@ python:
 install:
   - pip install ./hello_world_rest_api
   - pip install ./book_list
-script: pytest
+script: pytest -v
 
 

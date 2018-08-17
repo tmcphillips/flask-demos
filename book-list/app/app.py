@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -15,12 +15,29 @@ books = [
     }
 ]
 
+def is_valid_book(book):
+    return ('name'  in book and 
+            'price' in book and 
+            'isbn'  in book)
+
+# GET /books
 @app.route('/books')
 def get_books():
     return jsonify({'books': books})
 
+# POST /books
+@app.route('/books', methods=['POST'])
+def add_book():
+    request_json = request.get_json()
+    if (is_valid_book(request_json)):
+        books.insert(0, request_json)
+        return 'True'
+    else:
+        return 'False'
+
+# GET /books/<isbn>
 @app.route('/books/<int:isbn>')
-def get_books_by_isbn(isbn):
+def get_book_by_isbn(isbn):
     return_value = {}
     for book in books:
         if book['isbn'] == isbn:
@@ -29,4 +46,4 @@ def get_books_by_isbn(isbn):
                 'price': book['price'],
                 'isbn': book['isbn']
             }
-    return jsonify(return_value);
+    return jsonify(return_value)

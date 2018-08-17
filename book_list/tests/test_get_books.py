@@ -1,16 +1,16 @@
 import pytest
 
-from app.app import app
+from book_list.app import app
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def client(request):
     return app.test_client()
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def response(client):
     return client.get('/books')
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def response_json(response):
     return response.get_json()
 

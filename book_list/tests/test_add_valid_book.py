@@ -1,7 +1,7 @@
 import json
 import pytest
 
-from app.app import app
+from book_list.app import app
 
 new_book = {
 	"name": "Frankenstein",
@@ -9,7 +9,7 @@ new_book = {
 	"isbn": 12321321312
 }
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def response(request):
     client = app.test_client()
     return client.post('/books', data=json.dumps(new_book))
